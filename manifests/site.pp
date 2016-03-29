@@ -40,6 +40,9 @@ ini_setting { 'random ordering':
 
 node default {
 
+  ## Lab 11.1 memcached
+  include skeleton
+
   ## Lab 9.2 - 9.3 - Declare & Test the skeleton class include
   include skeleton
 
