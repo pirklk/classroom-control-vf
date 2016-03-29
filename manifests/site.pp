@@ -40,6 +40,9 @@ ini_setting { 'random ordering':
 
 node default {
 
+  ## Lab 11.2 nginx
+  include nginx
+
   ## Lab 11.1 memcached
   include memcached
 
