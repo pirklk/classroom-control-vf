@@ -39,6 +39,10 @@ ini_setting { 'random ordering':
 # specified in the console for that node.
 
 node default {
+
+  ## Lab 9.2 - 9.3 - Declare & Test the skeleton class include
+  include skeleton
+
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
@@ -58,6 +62,4 @@ node default {
     ip           => '127.0.0.1',
   }
   include users
-  ## Declare the skeleton
-  include skeleton
 }
