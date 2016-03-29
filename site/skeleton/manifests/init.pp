@@ -11,7 +11,7 @@ class skeleton {
     owner => 'root',
     group => 'root',
     mode => '0644',
-    content => "puppet:///modules/skeleton/.bashrc",
+    source => "puppet:///modules/skeleton/.bashrc",
   }  
   
 }
