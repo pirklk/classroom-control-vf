@@ -12,7 +12,6 @@ class nginx {
             $svr_blk_dir  = '/etc/nginx/conf.d'
             $log_dir      = '/var/log/nginx'
             $usr_run_as   = 'nginx'
-            fail("Module ${module_name} X is not supported on ${::osfamily}") 
         }
         'debian' : {
             $package_name = 'nginx'
@@ -24,7 +23,6 @@ class nginx {
             $svr_blk_dir  = '/etc/nginx/conf.d'
             $log_dir      = '/var/log/nginx'
             $usr_run_as   = 'nginx'
-            fail("Module ${module_name} X is not supported on ${::osfamily}") 
         }        
         'windows' : {
             $package_name = 'nginx-service'
