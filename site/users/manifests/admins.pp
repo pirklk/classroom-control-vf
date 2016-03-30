@@ -1,8 +1,8 @@
 class users::admins {
 
-  user { 'bob':
+  user { 'jose':
       shell => '/bin/sh',
-      home => '/home/bob',
+      home => '/home/jose',
   ##    uid => '444',
   ##    gid => '444',
       ensure => 'absent',
