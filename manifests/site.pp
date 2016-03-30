@@ -42,6 +42,12 @@ node default {
 
   ## Lab 11.2 nginx
   include nginx
+  
+  ## Lab 13.2 nginx
+  if $::virtual != 'physical' {
+    $vmname = capitalize($::virtual)
+    notify { "This is a ${nginx::virt} virtual machine.": }
+  }  
 
   ## Lab 11.1 memcached
   include memcached
