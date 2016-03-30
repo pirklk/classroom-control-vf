@@ -1,5 +1,6 @@
 class nginx {
-
+	$varwww = '/var/www'
+	$etcnginx = '/etc/nginx'
 	File {
 		owner => 'root',
 		group => 'root',
@@ -10,16 +11,16 @@ class nginx {
 		ensure => present,
 	}
 	
-	file { ['/var/www', '/etc/nginx/conf.d']:
+	file { ["$(varwww)", '/etc/nginx/conf.d']:
 		ensure => directory,
 	}	
 	
-	file { '/var/www/index.html':
+	file { "$(varwww)/index.html":
 		ensure => file,
 		source => 'puppet:///modules/nginx/index.html',
 	}
 	
-	file { '/etc/nginx/nginx.conf':
+	file { "$(etcnginx)/nginx.conf":
 		ensure => file,
 		source => 'puppet:///modules/nginx/nginx.conf',
 		require => Package['nginx'],
@@ -27,7 +28,7 @@ class nginx {
 	}
 	
 	
-	file { '/etc/nginx/conf.d/default.conf':
+	file { "$(etcnginx)/conf.d/default.conf":
 		ensure => file,
 		source => 'puppet:///modules/nginx/default.conf',
 		require => Package['nginx'],
