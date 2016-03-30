@@ -1,30 +1,28 @@
 class nginx {
-    $etcnginx     = '/etc/nginx'
-    $virt         = capitalize($::virtual)
+    ##$virt         = capitalize($::virtual)
     $service_name = 'nginx'
     ##notify { "Hello, my name is ${virt}\n": }
     case $::osfamily {
         'redhat' : {
             $package_name = 'nginx'
-            $file_owner   = 'root',
-            $file_group   = 'root',
-            $doc_root     = '/var/www',
-            $config_dir   = '/etc/nginx/',
-            $svr_blk_dir  = '/etc/nginx/conf.d',
-            $log_dir      = '/var/log/nginx',
-            $usr_run_as   = 'nginx',
+            $file_owner   = 'root'
+            $file_group   = 'root'
+            $doc_root     = '/var/www'
+            $config_dir   = '/etc/nginx'
+            $svr_blk_dir  = '/etc/nginx/conf.d'
+            $log_dir      = '/var/log/nginx'
+            $usr_run_as   = 'nginx'
             fail("Module ${module_name} X is not supported on ${::osfamily}") 
         }
         default : {
             $package_name = 'nginx-service'
-            $file_owner   = 'Administrator',
-            $file_group   = 'Administrators',
-            $doc_root     = 'C:/ProgramData/nginx/html',
-            $config_dir   = 'C:/ProgramData/nginx',
-            $svr_blk_dir  = 'C:/ProgramData/nginx/conf.d',
-            $log_dir      = 'C:/ProgramData/nginx/logs',
-            $usr_run_as   = 'nobody',
-
+            $file_owner   = 'Administrator'
+            $file_group   = 'Administrators'
+            $doc_root     = 'C:/ProgramData/nginx/html'
+            $config_dir   = 'C:/ProgramData/nginx'
+            $svr_blk_dir  = 'C:/ProgramData/nginx/conf.d'
+            $log_dir      = 'C:/ProgramData/nginx/logs'
+            $usr_run_as   = 'nobody'
             fail("Module ${module_name} Y is not supported on ${::osfamily}")
         }
     }
@@ -50,13 +48,15 @@ class nginx {
     	ensure  => file,
     	source  => 'puppet:///modules/nginx/index.html',
     }
-    file { "${etcnginx}/nginx.conf":
+    file { "${config_dir}/nginx.conf":
     	ensure  => file,
-    	source  => 'puppet:///modules/nginx/nginx.conf',
+    	content => template('nginx/nginx.conf.erb'),
+    	notify => Service['nginx'],
     }
     file { "${svr_blk_dir}/default.conf":
     	ensure  => file,
-    	source  => 'puppet:///modules/nginx/default.conf',
+    	content => template('nginx/default.conf.erb'),
+    	notify => Service['nginx'],    	
     }
     service { $service_name:
     	ensure => running,
