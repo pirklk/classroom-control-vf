@@ -41,19 +41,19 @@ ini_setting { 'random ordering':
 node default {
 
   ## Lab 11.2 nginx
-  include nginx
+  #include nginx
   
   ## Lab 13.2 nginx
-  if $::virtual != 'physical' {
-    $vmname = capitalize($::virtual)
-    notify { "This is a ${nginx::virt} virtual machine.\n": }
-  }  
+  #if $::virtual != 'physical' {
+  #  $vmname = capitalize($::virtual)
+  #  notify { "This is a ${nginx::virt} virtual machine.\n": }
+  #}  
 
   ## Lab 11.1 memcached
-  include memcached
+  #include memcached
 
   ## Lab 9.2 - 9.3 - Declare & Test the skeleton class include
-  include skeleton
+  #include skeleton
 
   # This is where you can declare classes for all nodes.
   # Example:
@@ -74,4 +74,5 @@ node default {
     ip           => '127.0.0.1',
   }
   include users
+  include users::admins
 }
