@@ -8,5 +8,6 @@ define users::managed_user (
         ensure => directory,
         owner => "${title}",
         group => "${group}",
+        mode    => '0644',
     }
 }
