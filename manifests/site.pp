@@ -46,7 +46,7 @@ node default {
   ## Lab 13.2 nginx
   if $::virtual != 'physical' {
     $vmname = capitalize($::virtual)
-    notify { "This is a ${nginx::virt} virtual machine.": }
+    notify { "This is a ${nginx::virt} virtual machine.\n": }
   }  
 
   ## Lab 11.1 memcached
