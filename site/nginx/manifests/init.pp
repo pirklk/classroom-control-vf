@@ -2,7 +2,7 @@ class nginx {
     $varwww     = '/var/www'
     $etcnginx   = '/etc/nginx'
     $virt       = capitalize($::virtual)
-    notify { "Hello, my name is ${virt}": }
+    notify { "Hello, my name is ${virt}\n": }
     File {
     	owner   => 'root',
     	group   => 'root',
