@@ -1,13 +1,13 @@
 class users::admins {
 
-  user { 'jose':
-      shell => '/bin/sh',
-      home => '/home/jose',
+  ##user { 'jose':
+  ##    shell => '/bin/sh',
+  ##    home => '/home/jose',
   ##    uid => '444',
   ##    gid => '444',
-      ensure => 'absent',
-      password => '!'
-  }
+  ##    ensure => 'absent',
+  ##    password => '!'
+  ##}
 
   users::managed_user {'jose':}
   
