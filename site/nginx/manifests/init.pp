@@ -5,6 +5,8 @@ class nginx {
     	owner   => 'root',
     	group   => 'root',
     	mode    => '0664',
+    	require => Package['nginx'],
+    	notify  => Service['nginx'],    	
     }
     package { 'nginx':
     	ensure  => present,
@@ -19,14 +21,10 @@ class nginx {
     file { "${etcnginx}/nginx.conf":
     	ensure  => file,
     	source  => 'puppet:///modules/nginx/nginx.conf',
-    	require => Package['nginx'],
-    	notify  => Service['nginx'],
     }
     file { "${etcnginx}/conf.d/default.conf":
     	ensure  => file,
     	source  => 'puppet:///modules/nginx/default.conf',
-    	require => Package['nginx'],
-    	notify  => Service['nginx'],
     }
     service { 'nginx':
     	ensure => running,
