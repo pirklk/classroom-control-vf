@@ -1,7 +1,7 @@
 define users::managed_user (
     $group = $title,
 ) {
-    user { $title:
+    user { "${title}":
         ensure => present,
     }
     file { "/home/${title}":
