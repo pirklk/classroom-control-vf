@@ -1,10 +1,10 @@
 class nginx {
     ##$virt         = capitalize($::virtual)
-    $service_name = 'nginx'
     ##notify { "Hello, my name is ${virt}\n": }
     case $::osfamily {
         'redhat' : {
             $package_name = 'nginx'
+            $service_name = 'nginx'
             $file_owner   = 'root'
             $file_group   = 'root'
             $doc_root     = '/var/www'
@@ -14,8 +14,21 @@ class nginx {
             $usr_run_as   = 'nginx'
             fail("Module ${module_name} X is not supported on ${::osfamily}") 
         }
-        default : {
+        'debian' : {
+            $package_name = 'nginx'
+            $service_name = 'nginx'
+            $file_owner   = 'root'
+            $file_group   = 'root'
+            $doc_root     = '/var/www'
+            $config_dir   = '/etc/nginx'
+            $svr_blk_dir  = '/etc/nginx/conf.d'
+            $log_dir      = '/var/log/nginx'
+            $usr_run_as   = 'nginx'
+            fail("Module ${module_name} X is not supported on ${::osfamily}") 
+        }        
+        'windows' : {
             $package_name = 'nginx-service'
+            $service_name = 'nginx'
             $file_owner   = 'Administrator'
             $file_group   = 'Administrators'
             $doc_root     = 'C:/ProgramData/nginx/html'
@@ -23,6 +36,8 @@ class nginx {
             $svr_blk_dir  = 'C:/ProgramData/nginx/conf.d'
             $log_dir      = 'C:/ProgramData/nginx/logs'
             $usr_run_as   = 'nobody'
+        }        
+        default : {
             fail("Module ${module_name} Y is not supported on ${::osfamily}")
         }
     }
