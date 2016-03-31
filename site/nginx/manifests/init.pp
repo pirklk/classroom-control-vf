@@ -51,7 +51,7 @@ class nginx {
     ##	require => Package[$service_name],
     ##	notify  => Service[$service_name],    	
     }
-    package { "${package}":
+    package { 'nginx':
     	ensure  => present,
     }
     file { [$doc_root, $svr_blk_dir]:
