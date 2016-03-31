@@ -42,7 +42,7 @@ node default {
 
   ## Lab 18.1 nginx
   class { 'nginx' :
-    root => '/var/www',
+    root => '/var/www/html',
   }
 
   ## Lab 17.1
