@@ -18,7 +18,7 @@ class profile::wordpress {
 	}
 	
 	include apache::mod::php 	
-	apache::vhost { 'localhost'
+	apache::vhost { 'localhost' :
 	  port    => '80',
 	  docroot => '/var/www/wordpress',
 	}
