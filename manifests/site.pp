@@ -40,6 +40,10 @@ ini_setting { 'random ordering':
 
 node default {
 
+  include profile::wordpress
+  
+
+
   ## Lab 18.2 nginx
   #include nginx
 
