@@ -41,9 +41,10 @@ ini_setting { 'random ordering':
 node default {
 
   ## Lab 18.1 nginx
-  class { 'nginx' :
-    root => '/var/www/html',
-  }
+  include nginx
+  #class { 'nginx' :
+  #  root => '/var/www/html',
+  #}
 
   ## Lab 17.1
   #$message = hiera('message')
