@@ -33,7 +33,6 @@ class profile::wordpress {
 		db_password    => 'strongpassword2',    		
 		install_dir => '/var/www/wordpress',
 		require => [
-			Package['wget'],
 			User['wordpress'],
 			Group['wordpress'],
 		]
