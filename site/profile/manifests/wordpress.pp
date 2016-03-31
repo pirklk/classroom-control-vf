@@ -1,32 +1,32 @@
 class profile::wordpress {
-	$user = 'pirklk'
-	
+
 	# Mysql Server
 	class { '::mysql::server':
 	  root_password => 'password',
 	  remove_default_accounts => true,
 	}
-
+	
 	class { '::mysql::bindings' :
 		php_enable => true
 	}
-
+	
 	# WordPress Config
-	package {'wget':
-		ensure => present,
-	}
 	
 	# Apache VHost Config
 	class { 'apache': 
 		default_vhost => false,
 	}
 	
-	include apache::mod::php 
-	apache::vhost { $::fqdn:
+	package {'wget':
+		ensure => present,
+	}
+	
+	apache::vhost { 'localhost'
 	  port    => '80',
 	  docroot => '/var/www/wordpress',
 	}
 
+	include apache::mod::php 
 	
 	# Setup Wordpress
 	class { '::wordpress': 	
@@ -44,21 +44,11 @@ class profile::wordpress {
 		]
 	}
 
-	#Local User for Wordpress
 	user { 'wordpress': 
 		ensure => present,
 	}
-
-	#Local Group for wordpress
-
 	group { 'wordpress': 
 		ensure => present,
 	}
-	user { 'pirklk': 
-		 group => 'wheel',
-	}	
-	group { 'wheel': 
-		ensure => present,
-	}	
 }
 
