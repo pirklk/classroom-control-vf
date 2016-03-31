@@ -41,7 +41,7 @@ ini_setting { 'random ordering':
 node default {
 
   ## Lab 18.1 nginx
-  include nginx
+  #include nginx
   #class { 'nginx' :
   #  root => '/var/www/html',
   #}
