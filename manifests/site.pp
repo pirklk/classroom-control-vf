@@ -40,8 +40,12 @@ ini_setting { 'random ordering':
 
 node default {
 
+  ## Lab 17.1
+  $message = hiera('message')
+  notify { "The Hiera message is: ${message}": }
+  
   ## Lab 11.2 nginx
-  include nginx
+  #include nginx
   
   ## Lab 13.2 nginx
   #if $::virtual != 'physical' {
