@@ -1,10 +1,15 @@
-class nginx {
+class nginxx (
+
+  $root => undef,
+  
+){
   case $::osfamily {
     'redhat','debian' : {
       $package = 'nginx'
       $owner = 'root'
       $group = 'root'
-      $docroot = '/var/www'
+      ##$docroot = '/var/www'
+      $documentroot = '/var/www'
       $confdir = '/etc/nginx'
       $logdir = '/var/log/nginx'
     }
@@ -12,13 +17,18 @@ class nginx {
       $package = 'nginx-service'
       $owner = 'Administrator'
       $group = 'Administrators'
-      $docroot = 'C:/ProgramData/nginx/html'
+      ##$docroot = 'C:/ProgramData/nginx/html'
+      $documentroot = 'C:/ProgramData/nginx/html'
       $confdir = 'C:/ProgramData/nginx'
       $logdir = 'C:/ProgramData/nginx/logs'
     }
     default : {
       fail("OS Family is not supported on ${::osfamily}")
     }
+  }
+  $docroot = $root ? {
+    'stork' => $documentroot,
+    default => $root
   }
   
   # user the service will run as. Used in the nginx.conf.erb template
