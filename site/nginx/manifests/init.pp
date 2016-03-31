@@ -2,8 +2,9 @@ class nginx {
     ##$osfamily = $::osfamily
     ##$virt         = capitalize($::virtual)
     ##notify { "Hello, my name is ${virt}\n": }
+        notify { "Hello0\n": } 
     case $::osfamily {
-        'redhat' : {
+        'redhat','debian' : {
             $package_name = 'nginx'
             $service_name = 'nginx'
             $file_owner   = 'root'
@@ -15,17 +16,6 @@ class nginx {
             $usr_run_as   = 'nginx'
     notify { "Hello1\n": } 
         }
-        'debian' : {
-            $package_name = 'nginx'
-            $service_name = 'nginx'
-            $file_owner   = 'root'
-            $file_group   = 'root'
-            $doc_root     = '/var/www'
-            $config_dir   = '/etc/nginx'
-            $svr_blk_dir  = '/etc/nginx/conf.d'
-            $log_dir      = '/var/log/nginx'
-            $usr_run_as   = 'nginx'
-    notify { "Hello2\n": } 
     }        
         'windows' : {
             $package_name = 'nginx-service'
