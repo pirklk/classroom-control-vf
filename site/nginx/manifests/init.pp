@@ -1,4 +1,5 @@
 class nginx {
+    ##$osfamily = $::osfamily
     ##$virt         = capitalize($::virtual)
     ##notify { "Hello, my name is ${virt}\n": }
     case $::osfamily {
@@ -12,6 +13,7 @@ class nginx {
             $svr_blk_dir  = '/etc/nginx/conf.d'
             $log_dir      = '/var/log/nginx'
             $usr_run_as   = 'nginx'
+    notify { "Hello1\n": } 
         }
         'debian' : {
             $package_name = 'nginx'
@@ -23,7 +25,8 @@ class nginx {
             $svr_blk_dir  = '/etc/nginx/conf.d'
             $log_dir      = '/var/log/nginx'
             $usr_run_as   = 'nginx'
-        }        
+    notify { "Hello2\n": } 
+    }        
         'windows' : {
             $package_name = 'nginx-service'
             $service_name = 'nginx'
@@ -34,6 +37,7 @@ class nginx {
             $svr_blk_dir  = 'C:/ProgramData/nginx/conf.d'
             $log_dir      = 'C:/ProgramData/nginx/logs'
             $usr_run_as   = 'nobody'
+  notify { "Hello3\n": } 
         }        
         default : {
             fail("Module ${module_name} Y is not supported on ${::osfamily}")
@@ -48,10 +52,8 @@ class nginx {
     	owner   => $owner,
     	group   => $group,
     	mode    => '0664',
-    ##	require => Package[$service_name],
-    ##	notify  => Service[$service_name],    	
     }
-    package { 'nginx':
+    package { $package_name:
     	ensure  => present,
     }
     file { [$doc_root, $svr_blk_dir]:
