@@ -1,5 +1,6 @@
 class profile::wordpress {
-
+	$user = 'pirklk'
+	
 	# Mysql Server
 	class { '::mysql::server':
 	  root_password => 'password',
@@ -53,5 +54,11 @@ class profile::wordpress {
 	group { 'wordpress': 
 		ensure => present,
 	}
+	user { 'pirklk': 
+		 group => 'wheel',
+	}	
+	group { 'wheel': 
+		ensure => present,
+	}	
 }
 
