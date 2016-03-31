@@ -27,7 +27,7 @@ class nginx (
     }
   }
   $docroot = $root ? {
-    'stork' => $documentroot,
+    undef => $documentroot,
     default => $root
   }
   
