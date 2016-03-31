@@ -1,7 +1,11 @@
 class profile::wordpress {
 	# Mysql Server
 	class { '::mysql::server':
-	  root_password           => 'password',
+	  root_password => 'password',
+	}
+
+	class { 'mysql::bindings'
+		php_enable => true
 	}
 
 	# WordPress Config
