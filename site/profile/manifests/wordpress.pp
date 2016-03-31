@@ -17,16 +17,11 @@ class profile::wordpress {
 		default_vhost => false,
 	}
 	
-	package {'wget':
-		ensure => present,
-	}
-	
+	include apache::mod::php 	
 	apache::vhost { 'localhost'
 	  port    => '80',
 	  docroot => '/var/www/wordpress',
 	}
-
-	include apache::mod::php 
 	
 	# Setup Wordpress
 	class { '::wordpress': 	
