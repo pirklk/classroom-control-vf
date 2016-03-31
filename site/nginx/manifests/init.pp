@@ -1,4 +1,4 @@
-class nginxx (
+class nginx (
 
   $root => undef,
   
