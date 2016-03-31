@@ -4,7 +4,7 @@ class profile::wordpress {
 	  root_password => 'password',
 	}
 
-	class { 'mysql::bindings'
+	class { '::mysql::bindings'
 		php_enable => true
 	}
 
@@ -41,3 +41,4 @@ class profile::wordpress {
 		ensure => present,
 	}
 }
+
